@@ -1,0 +1,13 @@
+.LoginCard {
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .EmailContrainer{
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .EmailContrainer> * {
+    width: 100%;
+  }
