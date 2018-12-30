@@ -1,9 +1,7 @@
-
-<mat-card class="LoginCard">
+<mat-card class="LoginCard"  >
   <h1>Sign In</h1>
   <mat-card-content>
     <div class="EmailContrainer">
-
       <mat-form-field>
         <input matInput placeholder="Enter your email" [formControl]="email" required>
         <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>

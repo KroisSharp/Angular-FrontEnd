@@ -2,6 +2,7 @@
     max-width: 400px;
     margin-left: auto;
     margin-right: auto;
+    margin-top: 5%
   }
   .EmailContrainer{
     display: flex;
@@ -11,3 +12,4 @@
   .EmailContrainer> * {
     width: 100%;
   }
+
