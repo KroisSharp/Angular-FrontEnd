@@ -1,2 +1,29 @@
-<mat-toolbar color="primary" class="example-fill-remaining-space">Mik Kröis - Shopping list</mat-toolbar>
-  <router-outlet></router-outlet>
+<mat-toolbar color="primary" class="remaining-space">
+    <mat-toolbar-row>
+        <span>Mik Kröis - Shopping list</span>
+        <span class="spacer"></span>
+
+        <button mat-icon-button [matMenuTriggerFor]="menu">
+                <mat-icon>more_vert</mat-icon>
+              </button>
+              <mat-menu #menu="matMenu">
+                <button mat-menu-item>
+                  <mat-icon>playlist_add</mat-icon>
+                  <span>Add item</span>
+                </button>
+                <button mat-menu-item disabled>
+                  <mat-icon>delete_forever</mat-icon>
+                  <span>Delete</span>
+                </button>
+                <button mat-menu-item>
+                  <mat-icon>keyboard_tab</mat-icon>
+                  <span>Sign out</span>
+                </button>
+              </mat-menu>
+        
+      </mat-toolbar-row>
+</mat-toolbar>
+
+
+
+<router-outlet></router-outlet>
