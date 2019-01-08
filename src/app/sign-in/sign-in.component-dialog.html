@@ -1,0 +1,10 @@
+<h1 mat-dialog-title>Error while sign in</h1>
+<div mat-dialog-content>
+    error code: {{data.errorCode}}
+    <br>
+    ErrorMessage: {{data.errorMessage}}
+    <br> please try again
+</div>
+<div mat-dialog-actions>
+    <button mat-raised-button color="primary" (click)="onNoClick()">ok</button>
+</div>
