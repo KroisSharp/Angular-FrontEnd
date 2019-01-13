@@ -8,6 +8,7 @@ import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material';
 import { HttpResponse } from '@angular/common/http';
 import { AuthServiceService } from '../auth-service.service';
 import { auth } from 'firebase';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 export interface DialogData {
   errorCode: string;
