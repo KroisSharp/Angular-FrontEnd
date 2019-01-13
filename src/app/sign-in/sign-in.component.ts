@@ -3,9 +3,11 @@ import { FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { map } from 'rxjs/operators';
-import {FirebaseAuth} from '@angular/fire'
+import { FirebaseAuth } from '@angular/fire'
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material';
 import { HttpResponse } from '@angular/common/http';
+import { AuthServiceService } from '../auth-service.service';
+import { auth } from 'firebase';
 
 export interface DialogData {
   errorCode: string;
@@ -21,7 +23,10 @@ export class SignInComponent implements OnInit {
 
 
 
-  constructor(private _router: Router, private afAuth: AngularFireAuth, public dialog: MatDialog) { }
+  constructor(private _router: Router,
+    private afAuth: AngularFireAuth,
+    public dialog: MatDialog,
+    private Auth: AuthServiceService) { }
 
   ngOnInit() {
   }
@@ -34,15 +39,13 @@ export class SignInComponent implements OnInit {
     return this.email.hasError('required') ? 'You must enter a value' :
       this.email.hasError('email') ? 'Not a valid email' :
         '';
-
   }
 
 
 
 
   SignInBtn(Username, Password) {
-    this.afAuth.auth.signInWithEmailAndPassword("test@test.test", "1234567")
-    .catch(err => {
+    this.Auth.DoLogin(Username, Password).catch(err => {
       console.log(err.code)
       this.openErrorDialog(err.code, err.message)
     })
@@ -51,7 +54,7 @@ export class SignInComponent implements OnInit {
   openErrorDialog(errorcode, errormessage): void {
     const dialogRef = this.dialog.open(SignInComponentDialog, {
       width: '350px',
-      data: {errorCode: errorcode, errorMessage: errormessage}
+      data: { errorCode: errorcode, errorMessage: errormessage }
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -71,7 +74,7 @@ export class SignInComponentDialog {
 
   constructor(
     public dialogRef: MatDialogRef<SignInComponentDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
+    @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
 
   onNoClick(): void {
     this.dialogRef.close();
