@@ -30,14 +30,16 @@ export class SignInComponent implements OnInit {
     public dialog: MatDialog,
     private Auth: AuthServiceService,
     public SnackBar: MatSnackBar,
-    private CookieService: CookieService) { }
+    private CookieService: CookieService) {
+      this.FirstTimeCheck()
+     }
 
     hide = true; //set password hidden by default
     email = new FormControl('', [Validators.required, Validators.email]);
     CheckBoxUsername = false; 
 
   ngOnInit() {
-    this.FirstTimeCheck()
+  
   }
 
 
