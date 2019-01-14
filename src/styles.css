@@ -1,6 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
+
+body { margin: 0; font-family: 'Roboto', sans-serif; }
 .mat-ripple-element {
     background: rgba(10,115,157, .4) !important;
   }
@@ -11,3 +13,11 @@
   .mat-ripple-element {
   background: rgba(10,115,157, .4) !important;
 }
+
+.white-snackbar  .mat-simple-snackbar-action {
+  color: rgb(10, 115, 157) !important;
+  }
+.white-snackbar {
+color: white
+  }
+

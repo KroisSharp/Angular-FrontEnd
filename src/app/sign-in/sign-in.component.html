@@ -18,7 +18,7 @@
   <mat-card-actions>
       <button mat-raised-button color="primary" (click)="SignInBtn(Username.value,Password.value)">Sign in</button>
       <button mat-raised-button color="primary">Forgot password</button>
-      Remember me  <mat-checkbox ></mat-checkbox>
+      Remember me  <mat-checkbox  [(ngModel)]="CheckBoxUsername"></mat-checkbox>
   </mat-card-actions>
 </mat-card>
 <br>
@@ -26,7 +26,7 @@
 <br>
 <br>
 
-<button mat-raised-button color="primary" (click)="openErrorDialogtest()">no use</button>
+<button mat-raised-button color="primary" (click)="checkbox()">no use</button>
 
 <h2>
     Forklaring, link til github, hvem er jeg måske et billede?

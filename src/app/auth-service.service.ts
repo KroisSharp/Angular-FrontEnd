@@ -14,7 +14,7 @@ export class AuthServiceService {
   constructor(public afAuth: AngularFireAuth,
     private Router : Router) { }
 
-  DoLogin(Username, Password) {
+  DoLogin(Username, Password, StayLoggedin) {
     return new Promise<any>((resolve, reject) => {
       firebase.auth().signInWithEmailAndPassword(Username, Password)
         .then(res => {
