@@ -3,7 +3,9 @@
         <span>Mik Kröis - Shopping list</span>
         <span class="spacer"></span>
 
-        <button mat-icon-button [matMenuTriggerFor]="menu">
+        <div *ngIf="GetUserLoggedIn();">
+          
+            <button mat-icon-button [matMenuTriggerFor]="menu">
                 <mat-icon>more_vert</mat-icon>
               </button>
               <mat-menu #menu="matMenu">
@@ -20,10 +22,10 @@
                   <span>Sign out</span>
                 </button>
               </mat-menu>
+        </div>
         
       </mat-toolbar-row>
 </mat-toolbar>
-
 
 
 <router-outlet></router-outlet>

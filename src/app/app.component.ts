@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { Button } from 'protractor';
 import { Router } from '@angular/router';
+import { AuthServiceService } from './auth-service.service';
 
 
 @Component({
@@ -11,7 +12,11 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
 
+  constructor(private Auth: AuthServiceService){}
 
+  GetUserLoggedIn(){
+    return this.Auth.GetUserLoggedIn();
+  }
 
 }
 
