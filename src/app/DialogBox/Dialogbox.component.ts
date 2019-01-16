@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core';
 
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material';
 
 
 export interface DialogData {
@@ -22,5 +22,6 @@ export interface DialogData {
     onNoClick(): void {
       this.dialogRef.close();
     }
-  
+
+
   }

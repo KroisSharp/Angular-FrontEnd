@@ -42,7 +42,7 @@ export class CreateUserComponent implements OnInit {
         'password must be at least 7 characters';
   }
 
-  CreateUserBtn(Username,Password){
+  CreateUserBtn(Username,Password) : void{
     this.CookieService.put("CookiesOk", "true");
 
     this.Auth.CreateUser(Username,Password).catch(err =>{

@@ -30,7 +30,7 @@ export class SignInComponent implements OnInit {
     public SnackBar: MatSnackBar,
     private CookieService: CookieService,
     private Router : Router) {
-      this.FirstTimeCheck()
+      this.FirstTimeCheck();
      }
 
     hide = true; //set password hidden by default
@@ -41,27 +41,27 @@ export class SignInComponent implements OnInit {
   
   }
 
-  CreateUserBtn(){
-    this.Router.navigate(['/Create'])
+  CreateUserBtn() : void{
+    this.Router.navigate(['/Create']);
   }
 
-FirstTimeCheck(){
+FirstTimeCheck() : void{
   //cookie
   if(this.CookieService.get("CookiesOk") == undefined) this.ShowCookiesPolicy();
   //username
   if(this.CookieService.get("Username") != undefined){
     //set username in txt here
-    this.email.setValue(this.CookieService.get("Username"))
+    this.email.setValue(this.CookieService.get("Username"));
     this.CheckBoxUsername = true;
   }
 }
-  emailinvalidMessage() {
+  emailinvalidMessage()  {
     return this.email.hasError('required') ? 'You must enter a value' :
       this.email.hasError('email') ? 'Not a valid email' :
         '';
   }
 
-  ShowCookiesPolicy(){
+  ShowCookiesPolicy() : void{
     var message = "Ved at logge ind acceptere du brugen af cookies"
     this.SnackBar.open(message, "Close", {
       panelClass: ['white-snackbar']
@@ -69,12 +69,7 @@ FirstTimeCheck(){
   }
 
 
-  checkbox(){
-    console.log("check box");
-    console.log(this.CheckBoxUsername)
-  }
-
-  SignInBtn(Username, Password) {
+  SignInBtn(Username, Password) : void {
     //make cookies remove snack
     this.CookieService.put("CookiesOk", "true");
     this.SnackBar.dismiss();
