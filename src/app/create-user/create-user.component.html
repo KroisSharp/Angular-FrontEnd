@@ -1,0 +1,26 @@
+<mat-card class="LoginCard"  >
+  <h1>Create user</h1>
+  <mat-card-content>
+    <div class="EmailContrainer">
+
+      <mat-form-field>
+        <input name="username" matInput placeholder="Enter your email" [formControl]="email" required  name="Username" #Username >
+        <mat-error *ngIf="email.invalid">{{emailinvalidMessage()}}</mat-error>
+      </mat-form-field>
+
+
+      <mat-form-field>
+          <input matInput placeholder="Enter your password"  name="Password" #Password matTooltip="password must be at least 7 characters"
+          [formControl]="password" required >
+          <mat-error *ngIf="password.invalid"> {{PasswordinvalidMessage()}}</mat-error>
+        </mat-form-field>
+    </div>
+
+  </mat-card-content>
+  <mat-card-actions>
+
+
+      <button mat-raised-button color="primary" (click)="CreateUserBtn(Username.value, Password.value)" [disabled]="email.invalid || password.invalid">Create user</button>
+  </mat-card-actions>
+</mat-card>
+

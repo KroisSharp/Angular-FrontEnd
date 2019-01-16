@@ -30,7 +30,8 @@ export class SignInComponent implements OnInit {
     public dialog: MatDialog,
     private Auth: AuthServiceService,
     public SnackBar: MatSnackBar,
-    private CookieService: CookieService) {
+    private CookieService: CookieService,
+    private Router : Router) {
       this.FirstTimeCheck()
      }
 
@@ -42,7 +43,9 @@ export class SignInComponent implements OnInit {
   
   }
 
-
+  CreateUserBtn(){
+    this.Router.navigate(['/Create'])
+  }
 
 FirstTimeCheck(){
   //cookie
@@ -82,7 +85,7 @@ FirstTimeCheck(){
 
 
     // do login
-    this.Auth.DoLogin(Username, Password, false).catch(err => {
+    this.Auth.DoLogin(Username, Password).catch(err => {
       console.log(err.code)
       this.openErrorDialog(err.code, err.message)
     })

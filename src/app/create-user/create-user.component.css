@@ -1,0 +1,18 @@
+.LoginCard {
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5%
+  }
+  .EmailContrainer{
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .EmailContrainer> * {
+    width: 100%;
+  }
+
+  ::ng-deep .mat-checkbox-checked .mat-checkbox-background {
+    background-color: rgb(63,81,181) !important;
+  }

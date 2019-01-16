@@ -18,7 +18,16 @@ export class AuthServiceService {
   constructor(public afAuth: AngularFireAuth,
     private Router : Router) { }
 
-  DoLogin(Username, Password, StayLoggedin) {
+
+    GetUserLoggedIn(){
+      return this.UserLoggedIn;
+    }
+  
+    SetUserLoggedIn(value: Boolean){
+      this.UserLoggedIn = value;
+    }
+
+  DoLogin(Username, Password) {
     return new Promise<any>((resolve, reject) => {
       firebase.auth().signInWithEmailAndPassword(Username, Password)
         .then(res => {
@@ -34,14 +43,21 @@ export class AuthServiceService {
     })
   }
 
- 
+ CreateUser(Username, Password){
+   return new Promise<any>((resolve, reject) =>{
+     firebase.auth().createUserWithEmailAndPassword(Username,Password)
+     .then(res =>{
+       resolve(res);
+       this.SetUserLoggedIn(true);
+       this.Router.navigate(['/mainmenu'])
+     })
+     err =>{
+       reject(err)
+       console.log(err)
+     }
+   })
+ }
 
-  GetUserLoggedIn(){
-    return this.UserLoggedIn;
-  }
 
-  SetUserLoggedIn(value: Boolean){
-    this.UserLoggedIn = value;
-  }
 
 }
