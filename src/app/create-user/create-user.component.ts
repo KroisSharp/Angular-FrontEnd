@@ -4,8 +4,8 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { CookieService } from 'angular2-cookie/services/cookies.service';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material';
-import {SignInComponentDialog} from '../sign-in/sign-in.component'
 import { AuthServiceService } from '../auth-service.service';
+import { Dialogboxcomponent } from '../DialogBox/Dialogbox.component';
 
 export interface DialogData {
   errorCode: string;
@@ -44,15 +44,17 @@ export class CreateUserComponent implements OnInit {
 
   CreateUserBtn(Username,Password){
     this.CookieService.put("CookiesOk", "true");
+
     this.Auth.CreateUser(Username,Password).catch(err =>{
-      console.log(err)
+      console.log(err.code)  
       this.openErrorDialog(err.code, err.message)
+
     })
   }
 
 
   openErrorDialog(errorcode, errormessage): void {
-    const dialogRef = this.dialog.open(SignInComponentDialog, {
+    const dialogRef = this.dialog.open(Dialogboxcomponent, {
       width: '350px',
       data: { errorCode: errorcode, errorMessage: errormessage }
     });
@@ -63,6 +65,8 @@ export class CreateUserComponent implements OnInit {
     });
 
   }
+
+
 
 }
 

@@ -10,11 +10,9 @@ import { AuthServiceService } from '../auth-service.service';
 import { auth } from 'firebase';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { CookieService } from 'angular2-cookie/services/cookies.service';
+import { Dialogboxcomponent } from '../DialogBox/Dialogbox.component';
 
-export interface DialogData {
-  errorCode: string;
-  errorMessage: string;
-}
+
 
 @Component({
   selector: 'app-sign-in',
@@ -92,7 +90,7 @@ FirstTimeCheck(){
   }
 
   openErrorDialog(errorcode, errormessage): void {
-    const dialogRef = this.dialog.open(SignInComponentDialog, {
+    const dialogRef = this.dialog.open(Dialogboxcomponent, {
       width: '350px',
       data: { errorCode: errorcode, errorMessage: errormessage }
     });
@@ -103,22 +101,4 @@ FirstTimeCheck(){
     });
 
   }
-}
-
-
-//dialog
-@Component({
-  selector: 'sign-in.component-dialog',
-  templateUrl: 'sign-in.component-dialog.html',
-})
-export class SignInComponentDialog {
-
-  constructor(
-    public dialogRef: MatDialogRef<SignInComponentDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
-
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
-
 }
