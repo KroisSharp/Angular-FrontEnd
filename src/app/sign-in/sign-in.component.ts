@@ -4,13 +4,16 @@ import { Router } from '@angular/router';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { map } from 'rxjs/operators';
 import { FirebaseAuth } from '@angular/fire'
-import { MatDialogRef, MAT_DIALOG_DATA, MatDialog, MatSnackBar } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialog, MatSnackBar, MatYearView } from '@angular/material';
 import { HttpResponse } from '@angular/common/http';
 import { AuthServiceService } from '../auth-service.service';
 import { auth } from 'firebase';
-import {MatCheckboxModule} from '@angular/material/checkbox';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { CookieService } from 'angular2-cookie/services/cookies.service';
 import { Dialogboxcomponent } from '../DialogBox/Dialogbox.component';
+import { formatDate } from '@angular/common';
+import { CookieOptionsArgs } from 'angular2-cookie/services/cookie-options-args.model';
+import { CookieOptions } from 'angular2-cookie/services/base-cookie-options';
 
 
 
@@ -21,7 +24,10 @@ import { Dialogboxcomponent } from '../DialogBox/Dialogbox.component';
 })
 export class SignInComponent implements OnInit {
 
-
+  hide = true; //set password hidden by default
+  email = new FormControl('', [Validators.required, Validators.email]);
+  CheckBoxUsername = false;
+  MyDate : Date;
 
   constructor(private _router: Router,
     private afAuth: AngularFireAuth,
@@ -29,39 +35,38 @@ export class SignInComponent implements OnInit {
     private Auth: AuthServiceService,
     public SnackBar: MatSnackBar,
     private CookieService: CookieService,
-    private Router : Router) {
-      this.FirstTimeCheck();
-     }
+    private Router: Router) {
+    this.FirstTimeCheck();
+    this.MyDate = new Date();
+    }
 
-    hide = true; //set password hidden by default
-    email = new FormControl('', [Validators.required, Validators.email]);
-    CheckBoxUsername = false; 
+
 
   ngOnInit() {
-  
+
   }
 
-  CreateUserBtn() : void{
+  CreateUserBtn(): void {
     this.Router.navigate(['/Create']);
   }
 
-FirstTimeCheck() : void{
-  //cookie
-  if(this.CookieService.get("CookiesOk") == undefined) this.ShowCookiesPolicy();
-  //username
-  if(this.CookieService.get("Username") != undefined){
-    //set username in txt here
-    this.email.setValue(this.CookieService.get("Username"));
-    this.CheckBoxUsername = true;
+  FirstTimeCheck(): void {
+    //cookie
+    if (this.CookieService.get("CookiesOk") == undefined) this.ShowCookiesPolicy();
+    //username
+    if (this.CookieService.get("Username") != undefined) {
+      //set username in txt here
+      this.email.setValue(this.CookieService.get("Username"));
+      this.CheckBoxUsername = true;
+    }
   }
-}
-  emailinvalidMessage()  {
+  emailinvalidMessage() {
     return this.email.hasError('required') ? 'You must enter a value' :
       this.email.hasError('email') ? 'Not a valid email' :
         '';
   }
 
-  ShowCookiesPolicy() : void{
+  ShowCookiesPolicy(): void {
     var message = "Ved at logge ind acceptere du brugen af cookies"
     this.SnackBar.open(message, "Close", {
       panelClass: ['white-snackbar']
@@ -69,12 +74,13 @@ FirstTimeCheck() : void{
   }
 
 
-  SignInBtn(Username, Password) : void {
+  SignInBtn(Username, Password): void {
+
     //make cookies remove snack
-    this.CookieService.put("CookiesOk", "true");
+    this.CookieService.put("CookiesOk", "true", this.CookiesAddDays(365));
     this.SnackBar.dismiss();
     //checkbox remember username by cookies 
-    if(this.CheckBoxUsername == true) this.CookieService.put("Username", Username)
+    if (this.CheckBoxUsername == true) this.CookieService.put("Username", Username, this.CookiesAddDays(14))
 
 
     // do login
@@ -94,6 +100,20 @@ FirstTimeCheck() : void{
       console.log('The dialog was closed');
 
     });
+  }
+
+
+  mydate() {
+    this.CookieService.put("TestCookie", "true", this.CookiesAddDays(365));
 
   }
+
+  CookiesAddDays( value : number) : CookieOptionsArgs {
+    this.MyDate.setDate(this.MyDate.getDate() + value )
+    let opts: CookieOptionsArgs = {
+      expires: formatDate(this.MyDate, 'yyyy/MM/dd', 'en')
+    };
+    return opts;
+  }
+
 }
