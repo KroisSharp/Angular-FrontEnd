@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { CookieService } from 'angular2-cookie/services/cookies.service';
+import { AuthServiceService } from '../auth-service.service';
+import { auth } from 'firebase';
+import { Router } from '@angular/router';
 
 
 export interface PeriodicElement {
@@ -27,11 +31,24 @@ const ELEMENT_DATA: PeriodicElement[] = [
 
 export class MainMenuComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private CookieService: CookieService,
+    private auth : AuthServiceService,
+    private Router: Router,
+  ) {
+    this.ControllLogin();
+   }
 
   ngOnInit() {
   }
 
+  ControllLogin(){
+   console.log(this.CookieService.get('UID'))
+   console.log(this.auth.GetUserLoggedIn())
+    if(this.CookieService.get('UID') == undefined || !this.auth.GetUserLoggedIn()) {
+      this.Router.navigate(['/signin'])
+    }
+  }
 
   displayedColumns: string[] = ['name', 'Price', 'Department'];
   dataSource = ELEMENT_DATA;
