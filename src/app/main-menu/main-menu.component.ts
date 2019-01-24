@@ -43,8 +43,6 @@ export class MainMenuComponent implements OnInit {
   }
 
   ControllLogin(){
-   console.log(this.CookieService.get('UID'))
-   console.log(this.auth.GetUserLoggedIn())
     if(this.CookieService.get('UID') == undefined || !this.auth.GetUserLoggedIn()) {
       this.Router.navigate(['/signin'])
     }

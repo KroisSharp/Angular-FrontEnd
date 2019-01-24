@@ -14,7 +14,15 @@ import { MatDialog } from '@angular/material';
 })
 export class AppComponent {
 
-  constructor(private Auth: AuthServiceService, public dialog: MatDialog,){}
+  constructor(
+    private Auth: AuthServiceService,
+     public dialog: MatDialog,
+     private Router: Router,
+     ){
+    this.Router.navigate(['signin'])
+  }
+
+
 
   GetUserLoggedIn() : Boolean{
     return this.Auth.GetUserLoggedIn();
