@@ -14,6 +14,7 @@ import { Dialogboxcomponent } from '../DialogBox/Dialogbox.component';
 import { formatDate } from '@angular/common';
 import { CookieOptionsArgs } from 'angular2-cookie/services/cookie-options-args.model';
 import { CookieOptions } from 'angular2-cookie/services/base-cookie-options';
+import { ShoppingRESTService } from '../shopping-rest.service';
 
 
 
@@ -35,6 +36,7 @@ export class SignInComponent implements OnInit {
     private Auth: AuthServiceService,
     public SnackBar: MatSnackBar,
     private CookieService: CookieService,
+    private ShoppingRest: ShoppingRESTService,
     private Router: Router) {
     this.FirstTimeCheck();
     this.MyDate = new Date();
@@ -104,7 +106,11 @@ export class SignInComponent implements OnInit {
 
 
   mydate() {
-    this.CookieService.put("TestCookie", "true", this.CookiesAddDays(365));
+    console.log("clicked")
+    this.ShoppingRest.GetItems("Firebase").subscribe((Response) => console.log(Response), (error) => {
+      console.log(error.code);
+      this.openErrorDialog(error.code, error.message)
+    })
 
   }
 
