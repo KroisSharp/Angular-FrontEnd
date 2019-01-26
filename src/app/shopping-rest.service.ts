@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class ShoppingRESTService {
 
-  private reqHeader = new HttpHeaders({"Content-Type": "application/json"});
+  private BaseURL : string = 'http://localhost:52818/api'
 
 
   constructor(
@@ -15,7 +15,7 @@ export class ShoppingRESTService {
   ) { }
 
   GetItems(UID : String) : Observable<object> {
-   return this.HttpClient.get('http://localhost:52818/api/items/' + UID)
+   return this.HttpClient.get( this.BaseURL + '/items/' + UID)
   }
 
 }

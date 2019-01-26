@@ -6,13 +6,16 @@ import { Router } from '@angular/router';
 import { ShoppingRESTService } from '../shopping-rest.service';
 import { MatDialog } from '@angular/material';
 import { Dialogboxcomponent } from '../DialogBox/Dialogbox.component';
+import { DataSource } from '@angular/cdk/table';
 
 
 
-export interface PeriodicElement {
-  name: string;
+export interface Items {
+  Id? : number;
+  Name: string;
   Price: number;
   Category: string;
+  UID? : string;
 }
 
 
@@ -23,17 +26,17 @@ export interface PeriodicElement {
 // public virtual string UID { get; set; }
 
 
-const ELEMENT_DATA: PeriodicElement[] = [
-  { name: 'Yoghurt', Price: 12.95, Category: 'Mejeri' },
-  { name: 'Mælk', Price: 7.95, Category: 'Mejeri' },
-  { name: 'Fløde', Price: 6.95, Category: 'Mejeri' },
-  { name: 'æg', Price: 19.95, Category: 'Mejeri' },
-  { name: 'Kylling', Price: 45.0, Category: 'Kød' },
-  { name: 'Steak', Price: 250.0, Category: 'Kød' },
-  { name: 'Chips', Price: 14.95, Category: 'Slik' },
-  { name: 'vingummi', Price: 19.95, Category: 'Slik' },
-  { name: 'Sæbe', Price: 10.0, Category: 'Husholdning' },
-  { name: 'skraldepose', Price: 8.95, Category: 'Husholdning' },
+const ELEMENT_DATA: Items[] = [
+  { Name: 'Yoghurt', Price: 12.95, Category: 'Mejeri' },
+  { Name: 'Mælk', Price: 7.95, Category: 'Mejeri' },
+  { Name: 'Fløde', Price: 6.95, Category: 'Mejeri' },
+  { Name: 'æg', Price: 19.95, Category: 'Mejeri' },
+  { Name: 'Kylling', Price: 45.0, Category: 'Kød' },
+  { Name: 'Steak', Price: 250.0, Category: 'Kød' },
+  { Name: 'Chips', Price: 14.95, Category: 'Slik' },
+  { Name: 'vingummi', Price: 19.95, Category: 'Slik' },
+  { Name: 'Sæbe', Price: 10.0, Category: 'Husholdning' },
+  { Name: 'skraldepose', Price: 8.95, Category: 'Husholdning' },
 ];
 
 @Component({
@@ -45,6 +48,10 @@ const ELEMENT_DATA: PeriodicElement[] = [
 export class MainMenuComponent implements OnInit {
 
   LoadingList: Boolean = true;
+  dataSource : any;
+
+  displayedColumns: string[] = ['name', 'Price', 'Category'];
+  //dataSource = ELEMENT_DATA;
 
   constructor(
     private CookieService: CookieService,
@@ -66,15 +73,15 @@ export class MainMenuComponent implements OnInit {
     }
   }
 
-  displayedColumns: string[] = ['name', 'Price', 'Category'];
-  dataSource = ELEMENT_DATA;
+
 
   GetItems() {
     let uid = this.CookieService.get('UID');
     this.ShoppingRest.GetItems(uid).subscribe(
       (Response) => {
         this.LoadingList = false
-        //todo smid ind på liste her
+        this.dataSource = Response;
+        //todo smid ind på liste her brug response
       },
       (error) => {
         this.LoadingList = false
