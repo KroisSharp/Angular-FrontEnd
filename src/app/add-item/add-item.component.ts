@@ -18,8 +18,18 @@ export class AddItemComponent implements OnInit {
   myControl = new FormControl();
   options: Category[] = [
     {Department: 'mejeri'},
-    {Department: 'kød'},
-    {Department: 'slik'}
+    {Department: 'slik'},
+    {Department: 'Frugt og grønt'},
+    {Department: 'delikatesse'},
+    {Department: 'Fisk'},
+    {Department: 'Kiosk'},
+    {Department: 'Kolonial'},
+    {Department: 'Spiritus'},
+    {Department: 'Drikkelse'},
+    {Department: 'Slagter'},
+    {Department: 'Bager'},
+    {Department: 'Blomster'},
+    {Department: 'Andet'},
   ];
   filteredOptions: Observable<Category[]>;
 
