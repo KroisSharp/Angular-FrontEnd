@@ -19,13 +19,6 @@ export interface Items {
 }
 
 
-// public virtual int Id { get; set; }
-// public virtual string Name { get; set; }
-// public virtual double Price { get; set; }
-// public virtual string Category { get; set; }
-// public virtual string UID { get; set; }
-
-
 const ELEMENT_DATA: Items[] = [
   { Name: 'Yoghurt', Price: 12.95, Category: 'Mejeri' },
   { Name: 'Mælk', Price: 7.95, Category: 'Mejeri' },

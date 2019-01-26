@@ -28,6 +28,9 @@ export class AppComponent {
     return this.Auth.GetUserLoggedIn();
   }
 
+  AddItem(){
+    this.Router.navigate(['additem'])
+  }
 
   LogOut() : void{
     this.Auth.SignOut().catch(err =>{

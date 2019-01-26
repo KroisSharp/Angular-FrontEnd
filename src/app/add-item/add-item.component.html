@@ -1,0 +1,28 @@
+<br>
+<div class="container"> 
+  <mat-form-field>
+    <input matInput placeholder="Name" name="Name" #Name>
+  </mat-form-field>
+
+  <mat-form-field>
+      <input type="text" placeholder="Department"  matInput [formControl]="myControl" [matAutocomplete]="auto" name="Category" #Category>
+      <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+          {{option.Department}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+
+  <mat-form-field >
+    <input matInput placeholder="Amount" type="number" class="right-align" name="Price" #Price>
+    <span matSuffix>.95</span>
+    <span matSuffix > kr</span>
+  </mat-form-field>
+  <mat-card-actions>
+      <button mat-raised-button color="primary" (click)="PostItem(Name.value, Category.value, Price.value)">Add item</button>
+  </mat-card-actions>
+</div>
+
+
+
+  
